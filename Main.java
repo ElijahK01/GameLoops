@@ -75,7 +75,7 @@ public class Main implements Runnable{
 					continue; // exits the loop
 				}
 			}
-			System.out.println(allowableIterations); // output how many allowable iterations per tick
+			System.out.println(allowableIterations); // output how many allowable iterations per tick (or frames per tick)
 			System.out.println("FPS " + allowableIterations * (1000 / tickLength)); // outputs approximate fps
 			
 			// update tick dependent events if needed
