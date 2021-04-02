@@ -71,8 +71,8 @@ public class Main implements Runnable{
 				// if so, immediatly decrement the allowable iterations and exit the loop 
 				if((System.currentTimeMillis() - time) > tickLength) 
 				{
-					allowableIterations = allowableIterations == 1? 1 : allowableIterations --; // only decrement iteration count when able to do so while still rendering and updating
-					continue; // exits the loop
+					allowableIterations = (allowableIterations == 1? 1 : allowableIterations - 1); // only decrement iteration count when able to do so while still rendering and updating
+					break; // exits the loop
 				}
 			}
 			System.out.println(allowableIterations); // output how many allowable iterations per tick (or frames per tick)
