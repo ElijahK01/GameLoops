@@ -34,38 +34,45 @@ public class Main implements Runnable{
 	 * ============================================= Complex Loop =============================================
 	 */
 	
-	private void loopComplex() { // better uses the resources of the computer without a fixed framerate or character update rate. Tickrate can be used for environment and other things
+	// Better uses the resources of the computer without a fixed framerate or character update rate. 
+	// Tickrate can be used for environment and other things
+	private void loopComplex() { 
 		boolean running = true; // keeps track of the state of the program. Program terminates when running = false
 		long tickLength = 50;   // desired length of one cycle in milliseconds
 		
-		int allowableIterations = 5;
+		int allowableIterations = 5; // keeps track of how many "frames" can run per tick
 		
+		// actual loop
 		while(running) 
 		{
 			long time = System.currentTimeMillis(); // gets the time at the start of the loop
 			
-			
+			// frame loop
 			for(int i = 0; i < allowableIterations; i++) 
 			{
 				
+				// update and render functions not implemented, but this is when they should be ran
 				// update();
-				
 				
 				// render();
 				
 				// *********** Required sleep time ********** //
+				// for stability and consistency, it is reccomended to keep this code in
 				try {
 					Thread.sleep(1L);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (InterruptedException e) // standard catch block
+				{
 					e.printStackTrace();
 				}
 				// ****************************************** //
 				
+				// check if the the program is running over the allotted time for one tick, 
+				// if so, immediatly decrement the allowable iterations and exit the loop 
 				if((System.currentTimeMillis() - time) > tickLength) 
 				{
 					allowableIterations = allowableIterations == 1? 1 : allowableIterations --; // only decrement iteration count when able to do so while still rendering and updating
-					continue;
+					continue; // exits the loop
 				}
 			}
 			System.out.println(allowableIterations); // output how many allowable iterations per tick
@@ -74,12 +81,14 @@ public class Main implements Runnable{
 			// update tick dependent events if needed
 			
 			long timeElapsed = System.currentTimeMillis() - time; // gets the time taken from the time the loop started to the current moment
-			long excess = tickLength - timeElapsed; 
+			long excess = tickLength - timeElapsed;  // calculate how long the program has to go before the end of the tick
 			
 			if(excess > timeElapsed / allowableIterations)  // computes average time per iteration and if the excess time is greater than that, add one iteration per tick
 			{
-				allowableIterations++;
+				allowableIterations++; // increment allowable iterations by 1
 			}
+			
+			Thread.sleep(excess); // for stability, the thread pauses for the remainder of the tick length
 		}
 	}
 
@@ -93,7 +102,7 @@ public class Main implements Runnable{
 		boolean running = true; // keeps track of the state of the program. Program terminates when running = false
 		long tickLength = 50;   // desired length of one cycle in milliseconds
 		
-		int x = 0; // test variable for test output
+		// int x = 0; // test variable for test output
 		
 		while(running) 
 		{
@@ -104,9 +113,10 @@ public class Main implements Runnable{
 			// render();
 			
 			// test output
+			/*
 			x++;
 			System.out.println(x);
-			
+			*/
 			
 			try 
 			{
