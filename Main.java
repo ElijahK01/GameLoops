@@ -88,7 +88,19 @@ public class Main implements Runnable{
 				allowableIterations++; // increment allowable iterations by 1
 			}
 			
-			Thread.sleep(excess); // for stability, the thread pauses for the remainder of the tick length
+			 // for stability, the thread pauses for the remainder of the tick length if the excess is non-zero
+			if(excess > 0)
+			{
+				// standard try/catch block required for Thread.sleep()
+				try
+				{
+					Thread.sleep(excess);
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
